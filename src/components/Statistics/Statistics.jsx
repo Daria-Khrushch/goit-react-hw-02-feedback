@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Notification from '../Notification/Notification';
 import s from './Statistics.module.css';
@@ -27,6 +28,14 @@ const Statistics = ({
   } else {
     return <Notification message="There is no feedback" />;
   }
+};
+
+Statistics.propTypes = {
+  valueGood: PropTypes.number.isRequired,
+  valueNeutral: PropTypes.number.isRequired,
+  valueBad: PropTypes.number.isRequired,
+  valueTotal: PropTypes.number.isRequired,
+  valuePositiveFeedback: PropTypes.number.isRequired,
 };
 
 export default Statistics;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import s from './FeedbackOptions.module.css';
 
@@ -20,5 +21,11 @@ const FeedbackOptions = ({ onButtonGood, onButtonNeutral, onButtonBad }) => (
     </li>
   </ul>
 );
+
+FeedbackOptions.propTypes = {
+  onButtonGood: PropTypes.func.isRequired,
+  onButtonNeutral: PropTypes.func.isRequired,
+  onButtonBad: PropTypes.func.isRequired,
+};
 
 export default FeedbackOptions;
