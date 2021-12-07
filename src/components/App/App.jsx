@@ -1,9 +1,59 @@
-import Feedback from '../Feedback/Feedback';
+import React from 'react';
+import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
+import Statistics from '../Statistics/Statistics';
+import s from './App.module.css';
 
-export default function App() {
-  return (
-    <div>
-      <Feedback />
-    </div>
-  );
+class Feedback extends React.Component {
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
+
+  handleFeedback = name => {
+    this.setState(prevState => {
+      return {
+        [name]: prevState[name] + 1,
+      };
+    });
+  };
+
+  countTotalFeedback = () => {
+    return Object.values(this.state).reduce((acc, value) => acc + value, 0);
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    if (this.countTotalFeedback()) {
+      return ((this.state.good / this.countTotalFeedback()) * 100).toFixed();
+    } else return 0;
+  };
+
+  render() {
+    const options = Object.keys(this.state);
+    const total = this.countTotalFeedback();
+    const percentage = this.countPositiveFeedbackPercentage();
+    const statistics = Object.entries(this.state);
+    return (
+      <div>
+        <div className={s.Statistics}>
+          <style>
+            @import
+            url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+          </style>
+          <h1 className={s.title}>Please leave feedback</h1>
+          <FeedbackOptions
+            handleFeedback={this.handleFeedback}
+            options={options}
+          />
+          <Statistics
+            statistics={statistics}
+            valueTotal={total}
+            valuePositiveFeedback={percentage}
+          />
+        </div>
+      </div>
+    );
+  }
 }
+
+export default Feedback;

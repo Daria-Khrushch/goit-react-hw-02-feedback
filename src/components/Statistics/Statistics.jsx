@@ -3,39 +3,35 @@ import React from 'react';
 import Notification from '../Notification/Notification';
 import s from './Statistics.module.css';
 
-const Statistics = ({
-  valueGood,
-  valueNeutral,
-  valueBad,
-  valueTotal,
-  valuePositiveFeedback,
-}) => {
-  if (valueTotal) {
-    return (
-      <section>
-        <h1 className={s.title}>Statistics</h1>
-        <ul className={s.statisticValues}>
-          <li className={s.value}>Good: {valueGood}</li>
-          <li className={s.value}>Neutral: {valueNeutral}</li>
-          <li className={s.value}>Bad: {valueBad}</li>
-          <li className={s.value}>Total: {valueTotal}</li>
-          <li className={s.value}>
-            Positive Feedback: {valuePositiveFeedback}
-          </li>
-        </ul>
-      </section>
-    );
-  } else {
-    return <Notification message="There is no feedback" />;
-  }
+const Statistics = ({ statistics, valueTotal, valuePositiveFeedback }) => {
+  return (
+    <div>
+      {valueTotal && (
+        <section>
+          <h1 className={s.title}>Statistics</h1>
+          <ul className={s.statisticValues}>
+            {statistics.map(([name, value]) => {
+              return (
+                <li key={name} className={s.value}>
+                  {name}: {value}
+                </li>
+              );
+            })}
+            <li className={s.value}>
+              Positive Feedback: {valuePositiveFeedback} %
+            </li>
+          </ul>
+        </section>
+      )}
+
+      {!valueTotal && <Notification message="There is no feedback" />}
+    </div>
+  );
 };
 
 Statistics.propTypes = {
-  valueGood: PropTypes.number.isRequired,
-  valueNeutral: PropTypes.number.isRequired,
-  valueBad: PropTypes.number.isRequired,
+  statistics: PropTypes.array.isRequired,
   valueTotal: PropTypes.number.isRequired,
-  valuePositiveFeedback: PropTypes.number.isRequired,
 };
 
 export default Statistics;
