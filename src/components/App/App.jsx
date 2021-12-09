@@ -36,10 +36,6 @@ class Feedback extends React.Component {
     return (
       <div>
         <div className={s.Statistics}>
-          <style>
-            @import
-            url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
-          </style>
           <h1 className={s.title}>Please leave feedback</h1>
           <FeedbackOptions
             handleFeedback={this.handleFeedback}

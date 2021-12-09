@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import s from './FeedbackOptions.module.css';
 
 const FeedbackOptions = ({ handleFeedback, options }) => (
